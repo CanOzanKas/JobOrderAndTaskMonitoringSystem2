@@ -1,0 +1,31 @@
+# Ignore build folders and files
+*/bin/*
+*/obj/*
+
+# Ignore user-specific files
+*.user
+*.nuget.g.props
+*.nuget.g.targets
+
+# Ignore build cache files
+*.cache
+*.csproj.nuget.dgspec.json
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+*.AssemblyAttributes.cs
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cache
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.GlobalUsings.g.cs
+
+# Ignore environment-specific settings
+appsettings.Development.json
+
+# Ignore Visual Studio specific files
+.vscode/
+.vs/
+
+!AppCore/
+!AppPersistence/
+!AppServices/
+!WebAPI/
