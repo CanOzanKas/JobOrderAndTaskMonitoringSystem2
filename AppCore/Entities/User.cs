@@ -23,5 +23,5 @@ namespace AppCore.Entities {
 
         public Department Department { get; set; }
         
-    }
+    }     //klkmnklkl
 }
