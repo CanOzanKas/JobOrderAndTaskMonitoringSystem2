@@ -9,10 +9,10 @@ namespace AppPersistence.Repositories.GenericRepository {
     public class GenericRepository<T>:IGenericRepository<T> where T : class {
 
         private readonly AppDbContext _context;
-        public GenericRepository(AppDbContext context) { 
+        public GenericRepository(AppDbContext context) {
             _context = context;
         }
-        
+
         public void Create(T entity) {
             _context.Add<T>(entity);
             _context.SaveChanges();
