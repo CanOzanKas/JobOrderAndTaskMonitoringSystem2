@@ -21,8 +21,8 @@ namespace AppServices.Service.DepartmentServices {
             });
         }
 
-        public void DeleteDepartment(DepartmentDTO department) {
-            _repository.Delete(_repository.GetById(department.Id)); 
+        public void DeleteDepartment(int id) {
+            _repository.Delete(_repository.GetById(id)); 
         }
 
         public IEnumerable<DepartmentDTO> GetAllDepartments() {

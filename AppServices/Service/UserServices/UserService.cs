@@ -29,20 +29,48 @@ namespace AppServices.Service.UserServices {
             });
         }
 
-        public void DeleteUser(UserDTO user) {
-            throw new NotImplementedException();
+        public void DeleteUser(int id) {
+            _repository.Delete(_repository.GetById(id));
         }
 
         public IEnumerable<UserDTO> GetAllUsers() {
-            throw new NotImplementedException();
+            var users = _repository.GetAll();
+            return users.Select(user => new UserDTO { 
+                Id = user.Id,
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                Role = user.Role,
+                CreatedDate = user.CreatedDate,
+                UpdatedDate = user.UpdatedDate,
+                Department = user.Department
+            });
         }
 
         public UserDTO GetUserById(int id) {
-            throw new NotImplementedException();
+            User user = _repository.GetById(id);
+            return new UserDTO {
+                Id = user.Id,
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                Role = user.Role,
+                CreatedDate = user.CreatedDate,
+                UpdatedDate = user.UpdatedDate,
+                Department = user.Department
+            };
         }
 
-        public void UpdateUser(UserDTO user) {
-            throw new NotImplementedException();
+        public void UpdateUser(UserDTO userDTO) {
+            var user = _repository.GetById(userDTO.Id);
+            user.Name = userDTO.Name;
+            user.Surname = userDTO.Surname;
+            user.Email = userDTO.Email;
+            user.Role = userDTO.Role;
+            user.CreatedDate = userDTO.CreatedDate;
+            user.UpdatedDate = userDTO.UpdatedDate;
+            user.Department = userDTO.Department;
+            _repository.Update(user);
         }
     }
 }

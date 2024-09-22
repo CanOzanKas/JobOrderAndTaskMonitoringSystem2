@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace AppServices.Service.UserServices {
     public interface IUserService {
-        public void CreateUser(CreateUserDTO user);
-        public void UpdateUser(UserDTO user);
-        public void DeleteUser(UserDTO user);
+        public void CreateUser(CreateUserDTO createUserDTO);
+        public void UpdateUser(UserDTO userDTO);
+        public void DeleteUser(int id);
         public IEnumerable<UserDTO> GetAllUsers();
         public UserDTO GetUserById(int id);
 
