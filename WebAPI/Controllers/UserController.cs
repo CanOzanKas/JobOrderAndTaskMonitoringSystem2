@@ -1,5 +1,4 @@
-﻿using AppServices.DTOs.DepartmentDTOs;
-using AppServices.DTOs.UserDTOs;
+﻿using AppServices.DTOs.UserDTOs;
 using AppServices.Service.UserServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,29 +14,29 @@ namespace WebAPI.Controllers {
         }
 
         [HttpGet]
-        public IActionResult GetAllDepartments() {
+        public IActionResult GetAllUsers() {
             return Ok(_userService.GetAllUsers());
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetDepartmentById(int id) {
+        public IActionResult GetUserById(int id) {
             return Ok(_userService.GetUserById(id));
         }
 
         [HttpPost]
-        public IActionResult CreateDepartment(CreateUserDTO createUserDTO) {
+        public IActionResult CreateUser(CreateUserDTO createUserDTO) {
             _userService.CreateUser(createUserDTO);
             return Ok("User added successfully!");
         }
 
         [HttpPut]
-        public IActionResult UpdateDepartment(UserDTO userDTO) {
+        public IActionResult UpdateUser(UserDTO userDTO) {
             _userService.UpdateUser(userDTO);
             return Ok("User updated successfully!");
         }
 
         [HttpDelete]
-        public IActionResult DeleteDepartment(int id) {
+        public IActionResult DeleteUser(int id) {
             _userService.DeleteUser(id);
             return Ok("User deleted successfully!");
         }

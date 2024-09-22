@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppPersistence.Repositories.GenericRepository {
+namespace AppPersistence.Repositories.GenericRepo {
     public interface IGenericRepository<T> where T : class {
         public void Create(T entity);
         public void Update(T entity);
         public void Delete(T entity);
-        public IEnumerable<T> GetAll();
+        public List<T> GetAll();
         public T GetById(int id);
 
     }

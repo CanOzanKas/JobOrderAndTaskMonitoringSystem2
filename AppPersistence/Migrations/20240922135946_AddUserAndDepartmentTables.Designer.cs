@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppPersistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240922131405_AddUserAndDepartmentTables")]
+    [Migration("20240922135946_AddUserAndDepartmentTables")]
     partial class AddUserAndDepartmentTables
     {
         /// <inheritdoc />

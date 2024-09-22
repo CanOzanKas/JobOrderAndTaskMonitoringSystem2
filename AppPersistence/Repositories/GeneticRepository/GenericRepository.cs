@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppPersistence.Repositories.GenericRepository {
+namespace AppPersistence.Repositories.GenericRepo {
     public class GenericRepository<T>:IGenericRepository<T> where T : class {
 
         private readonly AppDbContext _context;
@@ -23,7 +23,7 @@ namespace AppPersistence.Repositories.GenericRepository {
             _context.SaveChanges();
         }
 
-        public IEnumerable<T> GetAll() {
+        public List<T> GetAll() {
             return _context.Set<T>().ToList();
         }
 

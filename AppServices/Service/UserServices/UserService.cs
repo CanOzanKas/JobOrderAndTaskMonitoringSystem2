@@ -1,6 +1,5 @@
 ﻿using AppCore.Entities;
-using AppPersistence.Context;
-using AppPersistence.Repositories.GenericRepository;
+using AppPersistence.Repositories.GenericRepo;
 using AppServices.DTOs.UserDTOs;
 using System;
 using System.Collections.Generic;
@@ -11,9 +10,9 @@ using System.Threading.Tasks;
 namespace AppServices.Service.UserServices {
     public class UserService:IUserService {
 
-        private readonly GenericRepository<User> _repository;
+        private readonly IGenericRepository<User> _repository;
 
-        public UserService(GenericRepository<User> repository) { 
+        public UserService(IGenericRepository<User> repository) { 
             _repository = repository;
         }
 
@@ -33,7 +32,7 @@ namespace AppServices.Service.UserServices {
             _repository.Delete(_repository.GetById(id));
         }
 
-        public IEnumerable<UserDTO> GetAllUsers() {
+        public List<UserDTO> GetAllUsers() {
             var users = _repository.GetAll();
             return users.Select(user => new UserDTO { 
                 Id = user.Id,
@@ -44,7 +43,7 @@ namespace AppServices.Service.UserServices {
                 CreatedDate = user.CreatedDate,
                 UpdatedDate = user.UpdatedDate,
                 Department = user.Department
-            });
+            }).ToList();
         }
 
         public UserDTO GetUserById(int id) {

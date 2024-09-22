@@ -11,7 +11,7 @@ namespace AppServices.Service.UserServices {
         public void CreateUser(CreateUserDTO createUserDTO);
         public void UpdateUser(UserDTO userDTO);
         public void DeleteUser(int id);
-        public IEnumerable<UserDTO> GetAllUsers();
+        public List<UserDTO> GetAllUsers();
         public UserDTO GetUserById(int id);
 
     }

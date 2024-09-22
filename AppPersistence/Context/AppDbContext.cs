@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 namespace AppPersistence.Context {
     public class AppDbContext:DbContext {
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            //base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\ProjectModels; Database=JobOrderAndTaskMonitoringSystem; Integrated Security=True; TrustServerCertificate=True");
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {
         }
+
+
 
         public DbSet<User> Users { get; set; }
         public DbSet<Department> Departments { get; set; }

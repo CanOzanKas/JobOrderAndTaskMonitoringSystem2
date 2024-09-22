@@ -12,7 +12,7 @@ namespace AppServices.Service.DepartmentServices {
         public void CreateDepartment(CreateDepartmentDTO department);
         public void UpdateDepartment(DepartmentDTO department);
         public void DeleteDepartment(int id);
-        public IEnumerable<DepartmentDTO> GetAllDepartments();
+        public List<DepartmentDTO> GetAllDepartments();
         public DepartmentDTO GetDepartmentById(int id);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using AppCore.Entities;
-using AppPersistence.Repositories.GenericRepository;
+using AppPersistence.Repositories.GenericRepo;
 using AppServices.DTOs.DepartmentDTOs;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace AppServices.Service.DepartmentServices {
     public class DepartmentService:IDepartmentService {
-        GenericRepository<Department> _repository;
+        private readonly IGenericRepository<Department> _repository;
 
-        public DepartmentService(GenericRepository<Department> repository) { 
+        public DepartmentService(IGenericRepository<Department> repository) { 
             _repository = repository;
         }
 
@@ -25,13 +25,13 @@ namespace AppServices.Service.DepartmentServices {
             _repository.Delete(_repository.GetById(id)); 
         }
 
-        public IEnumerable<DepartmentDTO> GetAllDepartments() {
+        public List<DepartmentDTO> GetAllDepartments() {
             var departments = _repository.GetAll();
             return departments.Select(d => new DepartmentDTO { 
                 Id = d.Id,
                 DepartmentName = d.DepartmentName,
                 Users = d.Users
-            });
+            }).ToList();
         }
 
         public DepartmentDTO GetDepartmentById(int id) {
