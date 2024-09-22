@@ -1,5 +1,6 @@
 ﻿using AppCore.Entities;
 using AppPersistence.Repositories.GenericRepository;
+using AppServices.DTOs.DepartmentDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,25 +15,40 @@ namespace AppServices.Service.DepartmentServices {
             _repository = repository;
         }
 
-        public void CreateDepartment(DepartmentDTO department) {
-            _repository.Create(department);
-
+        public void CreateDepartment(CreateDepartmentDTO department) {
+            _repository.Create(new Department {
+                DepartmentName = department.DepartmentName,
+            });
         }
 
         public void DeleteDepartment(DepartmentDTO department) {
-            _repository.Delete(department);
+            _repository.Delete(_repository.GetById(department.Id)); 
         }
 
-        public IEnumerable<Department> GetAllDepartments() {
-            throw new NotImplementedException();
+        public IEnumerable<DepartmentDTO> GetAllDepartments() {
+            var departments = _repository.GetAll();
+            return departments.Select(d => new DepartmentDTO { 
+                Id = d.Id,
+                DepartmentName = d.DepartmentName,
+                Users = d.Users
+            });
         }
 
-        public Department GetDepartmentById(int id) {
-            throw new NotImplementedException();
+        public DepartmentDTO GetDepartmentById(int id) {
+            var department = _repository.GetById(id);
+            return new DepartmentDTO() {
+                Id = department.Id,
+                DepartmentName = department.DepartmentName,
+                Users = department.Users
+            };
         }
 
-        public void UpdateDepartment(Department entity) {
-            throw new NotImplementedException();
+        public void UpdateDepartment(DepartmentDTO department) {
+            _repository.Update(new Department {
+                Id = department.Id,
+                DepartmentName = department.DepartmentName,
+                Users = department.Users
+            });
         }
     }
 }
