@@ -1,12 +1,13 @@
-﻿using AppCore.Enums;
+﻿using AppCore.Entities;
+using AppCore.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppCore.Entities {
-    public class JobOrder {
+namespace AppServices.DTOs.JobOrderDTOs {
+    public class JobOrderDTO {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -16,6 +17,7 @@ namespace AppCore.Entities {
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
 
-        public List<UserTask>? Tasks { get; set; }
+        public List<UserTask> Tasks { get; set; }
+
     }
 }

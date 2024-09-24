@@ -30,7 +30,7 @@ namespace AppServices.Service.DepartmentServices {
             return departments.Select(d => new DepartmentDTO { 
                 Id = d.Id,
                 DepartmentName = d.DepartmentName,
-                Users = d.Users
+                //Users = d.Users
             }).ToList();
         }
 
@@ -39,7 +39,7 @@ namespace AppServices.Service.DepartmentServices {
             return new DepartmentDTO() {
                 Id = department.Id,
                 DepartmentName = department.DepartmentName,
-                Users = department.Users
+                //Users = department.Users
             };
         }
 
@@ -47,7 +47,7 @@ namespace AppServices.Service.DepartmentServices {
             _repository.Update(new Department {
                 Id = department.Id,
                 DepartmentName = department.DepartmentName,
-                Users = department.Users
+                //Users = department.Users
             });
         }
     }

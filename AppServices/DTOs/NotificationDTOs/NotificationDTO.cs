@@ -1,11 +1,12 @@
-﻿using System;
+﻿using AppCore.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppCore.Entities {
-    public class Notification {
+namespace AppServices.DTOs.NotificationDTOs {
+    public class NotificationDTO {
         public int Id { get; set; }
         public string Message { get; set; }
 

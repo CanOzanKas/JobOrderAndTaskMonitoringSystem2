@@ -19,5 +19,8 @@ namespace AppCore.Entities {
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
 
+        public List<UserTask>? Tasks { get; set; }
+        public List<Notification>? Notifications { get; set; }
+
     }
 }

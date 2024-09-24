@@ -1,25 +1,17 @@
-﻿using AppCore.Enums;
+﻿using AppCore.Entities;
+using AppCore.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppCore.Entities {
-    public class UserTask {
-        public int Id { get; set; }
-
+namespace AppServices.DTOs.UserTaskDTOs {
+    public class CreateUserTaskDTO {
         public int JobOrderId { get; set; }
-        public JobOrder JobOrder { get; set; }
-        
         public string Title { get; set; }
         public string Description { get; set; }
-
         public int AssignedTo { get; set; }
-        public User AssignedUser { get; set; }
-
         public DateTime DueDate { get; set; }
-        public UserTaskStatusEnum Status { get; set; }
-
     }
 }

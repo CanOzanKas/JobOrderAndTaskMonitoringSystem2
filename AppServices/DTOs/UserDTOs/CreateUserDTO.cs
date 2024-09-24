@@ -14,7 +14,6 @@ namespace AppServices.DTOs.UserDTOs {
         public string PasswordHash { get; set; }
         public RoleEnum Role { get; set; }
         public DateTime CreatedDate { get; set; }
-        public Department Department { get; set; }
-
+        public int DepartmentId { get; set; }
     }
 }
