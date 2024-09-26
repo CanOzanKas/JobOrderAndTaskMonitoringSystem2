@@ -16,8 +16,5 @@ namespace AppServices.DTOs.JobOrderDTOs {
         public JobOrderStatusEnum Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
-
-        public List<UserTask> Tasks { get; set; }
-
     }
 }

@@ -22,7 +22,7 @@ namespace WebAPI.Controllers {
         public IActionResult GetJobOrderById(int id) { 
             return Ok(_jobOrderService.GetJobOrderById(id));
         }
-        [HttpGet("{status}")]
+        [HttpGet("status/{status}")]
         public IActionResult GetJobOrdersByStatus(JobOrderStatusEnum status) {
             return Ok(_jobOrderService.GetJobOrdersByStatus(status));
         }
@@ -42,6 +42,10 @@ namespace WebAPI.Controllers {
             return Ok("Job Order deleted successfully!");
         }
 
+        [HttpGet("JobOrderReport")]
+        public IActionResult GetJobOrderReport() {
+            return Ok(_jobOrderService.GetJobOrderReport());
+        }
 
     }
 }

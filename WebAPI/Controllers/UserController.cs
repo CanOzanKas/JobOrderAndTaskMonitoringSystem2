@@ -40,6 +40,11 @@ namespace WebAPI.Controllers {
             _userService.DeleteUser(id);
             return Ok("User deleted successfully!");
         }
+        [HttpGet("ByDepartment/{departmentId}")]
+        public IActionResult GetUsers(int departmentId) {
+            return Ok(_userService.GetAllUsersByDepartment(departmentId));
+        
+        }
 
 
     }

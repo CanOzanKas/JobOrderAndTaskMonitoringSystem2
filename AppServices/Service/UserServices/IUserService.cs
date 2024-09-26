@@ -13,6 +13,7 @@ namespace AppServices.Service.UserServices {
         public void DeleteUser(int id);
         public List<UserDTO> GetAllUsers();
         public UserDTO GetUserById(int id);
+        public List<UserDTO> GetAllUsersByDepartment(int departmentId);
 
     }
 }

@@ -8,12 +8,10 @@ namespace AppCore.Entities {
     public class Notification {
         public int Id { get; set; }
         public string Message { get; set; }
-
         public int UserId { get; set; }
         public User User { get; set; }
-
-        public int TaskId { get; set; }
-
+        public int UserTaskId { get; set; }
+        public UserTask UserTask { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

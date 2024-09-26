@@ -12,14 +12,15 @@ using System.Threading.Tasks;
 namespace AppServices.Service.UserTaskServices {
     public interface IUserTaskService {
 
-        public void CreateTask(CreateUserTaskDTO userTaskDTO);
-        public void UpdateTask(UserTaskDTO userTaskDTO);
-        public void DeleteTask(int id);
+        public void CreateUserTask(CreateUserTaskDTO userTaskDTO);
+        public void UpdateUserTask(UpdateUserTaskDTO userTaskDTO);
+        public void DeleteUserTask(int id);
         public UserTaskDTO GetUserTaskById(int id);
         public List<UserTaskDTO> GetAllUserTasks();
         public List<UserTaskDTO> GetAllUserTasksByStatus(UserTaskStatusEnum status);
-        public List<UserTaskDTO> GetAllUserTasksByDepartment(DepartmentDTO departmentDTO);
-        public JobOrderDTO GetRelatedJob(int id);
-    
+        public UserTasksByDepartmentDTO GetAllUserTasksByDepartment(int departmentId);
+        public List<UserTaskDTO> GetAllUserTasksByUser(int userId);
+        public UserTaskRelatedJobOrderDTO GetRelatedJob(int id);
+        public UserTaskReportDTO GetUserTaskReport();
     }
 }

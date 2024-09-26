@@ -12,29 +12,23 @@ namespace AppServices.Service.UserServices {
     public class UserService:IUserService {
 
         private readonly IGenericRepository<User> _repository;
-        private readonly IDepartmentService _departmentService;
+
 
         public UserService(IGenericRepository<User> repository, IDepartmentService departmentService) { 
             _repository = repository;
-            _departmentService = departmentService;
         }
 
         public void CreateUser(CreateUserDTO userDTO) {
-            var departmentDTO = _departmentService.GetDepartmentById(userDTO.DepartmentId);
-            
-            _repository.Create(new User {
+            var user = new User {
                 Name = userDTO.Name,
                 Surname = userDTO.Surname,
                 Email = userDTO.Email,
                 PasswordHash = userDTO.PasswordHash,
                 Role = userDTO.Role,
                 CreatedDate = userDTO.CreatedDate,
-                Department = new Department {
-                    Id = departmentDTO.Id,
-                    DepartmentName=departmentDTO.DepartmentName,
-                    //Users=departmentDTO.Users
-                }
-            });
+                DepartmentId = userDTO.DepartmentId
+            };
+            _repository.Create(user);
         }
 
         public void DeleteUser(int id) {
@@ -51,7 +45,21 @@ namespace AppServices.Service.UserServices {
                 Role = user.Role,
                 CreatedDate = user.CreatedDate,
                 UpdatedDate = user.UpdatedDate,
-                Department = user.Department
+                DepartmentId= user.DepartmentId
+            }).ToList();
+        }
+
+        public List<UserDTO> GetAllUsersByDepartment(int departmentId) {
+            var users = _repository.GetAll();
+            return users.Where(u => u.DepartmentId == departmentId).Select(user => new UserDTO {
+                Id = user.Id,
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                Role = user.Role,
+                CreatedDate = user.CreatedDate,
+                UpdatedDate = user.UpdatedDate,
+                DepartmentId = user.DepartmentId
             }).ToList();
         }
 
@@ -65,7 +73,7 @@ namespace AppServices.Service.UserServices {
                 Role = user.Role,
                 CreatedDate = user.CreatedDate,
                 UpdatedDate = user.UpdatedDate,
-                Department = user.Department
+                DepartmentId = user.DepartmentId
             };
         }
 
@@ -77,7 +85,7 @@ namespace AppServices.Service.UserServices {
             user.Role = userDTO.Role;
             user.CreatedDate = userDTO.CreatedDate;
             user.UpdatedDate = userDTO.UpdatedDate;
-            user.Department = userDTO.Department;
+            user.DepartmentId = userDTO.DepartmentId;
             _repository.Update(user);
         }
     }

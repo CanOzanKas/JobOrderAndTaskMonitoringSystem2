@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppCore.Entities {
-    public class JobOrder {
-        public int Id { get; set; }
+namespace AppServices.DTOs.JobOrderDTOs {
+    public class JobOrderDetailsDTO {
         public string Title { get; set; }
         public string Description { get; set; }
-        public PriorityEnum Priority { get; set; }
+        public string Priority { get; set; }
         public DateTime EstimatedCompletionDate { get; set; }
-        public JobOrderStatusEnum Status { get; set; }
+        public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
     }

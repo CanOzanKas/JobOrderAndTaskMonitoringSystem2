@@ -26,24 +26,27 @@ namespace AppPersistence.Context {
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Department)
-                .WithMany(d => d.Users)
+                .WithMany()
                 .HasForeignKey(u => u.DepartmentId);
 
             modelBuilder.Entity<UserTask>()
                 .HasOne(ut => ut.JobOrder)
-                .WithMany(j => j.Tasks)
+                .WithMany()
                 .HasForeignKey(ut => ut.JobOrderId);
 
             modelBuilder.Entity<UserTask>()
                 .HasOne(ut => ut.AssignedUser)
-                .WithMany(u => u.Tasks)
+                .WithMany()
                 .HasForeignKey(ut => ut.AssignedTo);
 
             modelBuilder.Entity<Notification>()
                 .HasOne(n => n.User)
-                .WithMany(u => u.Notifications)
+                .WithMany()
                 .HasForeignKey(n => n.UserId);
-            
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.UserTask)
+                .WithMany()
+                .HasForeignKey(n => n.UserTaskId);
 
         }
     }

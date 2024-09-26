@@ -14,41 +14,42 @@ namespace AppServices.Service.DepartmentServices {
         public DepartmentService(IGenericRepository<Department> repository) { 
             _repository = repository;
         }
-
         public void CreateDepartment(CreateDepartmentDTO department) {
             _repository.Create(new Department {
-                DepartmentName = department.DepartmentName,
+                DepartmentName = department.DepartmentName
             });
         }
-
         public void DeleteDepartment(int id) {
             _repository.Delete(_repository.GetById(id)); 
         }
-
         public List<DepartmentDTO> GetAllDepartments() {
             var departments = _repository.GetAll();
             return departments.Select(d => new DepartmentDTO { 
                 Id = d.Id,
-                DepartmentName = d.DepartmentName,
-                //Users = d.Users
+                DepartmentName = d.DepartmentName
             }).ToList();
         }
-
         public DepartmentDTO GetDepartmentById(int id) {
             var department = _repository.GetById(id);
+            
             return new DepartmentDTO() {
                 Id = department.Id,
-                DepartmentName = department.DepartmentName,
-                //Users = department.Users
+                DepartmentName = department.DepartmentName
             };
         }
-
-        public void UpdateDepartment(DepartmentDTO department) {
-            _repository.Update(new Department {
-                Id = department.Id,
-                DepartmentName = department.DepartmentName,
-                //Users = department.Users
-            });
+        public Department GetDepartmentEntityById(int id) { 
+            return _repository.GetById(id);
+        }
+        public void UpdateDepartment(DepartmentDTO departmentDTO) {
+            var department = _repository.GetById(departmentDTO.Id);
+            department.DepartmentName = departmentDTO.DepartmentName;   
+            _repository.Update(department);
+        }
+        public DepartmentDTO MapToDTO(Department department) {
+            return new DepartmentDTO() {
+                Id= department.Id,
+                DepartmentName = department.DepartmentName
+            };
         }
     }
 }

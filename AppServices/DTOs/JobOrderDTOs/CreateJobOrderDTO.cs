@@ -12,7 +12,6 @@ namespace AppServices.DTOs.JobOrderDTOs {
         public string Description { get; set; }
         public PriorityEnum Priority { get; set; }
         public DateTime EstimatedCompletionDate { get; set; }
-        public JobOrderStatusEnum Status { get; set; }
         public DateTime CreatedDate { get; set; }
 
     }

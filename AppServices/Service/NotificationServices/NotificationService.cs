@@ -16,11 +16,16 @@ namespace AppServices.Service.NotificationServices {
         }
 
         public void CreateNotification(CreateNotificationDTO createNotificationDTO) {
-            throw new NotImplementedException();
+            _repository.Create(new Notification { 
+                Message = createNotificationDTO.Message,
+                UserId = createNotificationDTO.UserId,
+                UserTaskId = createNotificationDTO.UserTaskId,
+                CreatedDate = createNotificationDTO.CreatedDate,
+            });
         }
 
         public void DeleteNotification(int id) {
-            throw new NotImplementedException();
+            _repository.Delete(_repository.GetById(id));    
         }
 
         public List<NotificationDTO> GetAllNotificationsByUserId(int userId) {

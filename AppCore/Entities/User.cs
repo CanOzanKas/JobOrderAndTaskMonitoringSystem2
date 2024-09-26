@@ -15,12 +15,8 @@ namespace AppCore.Entities {
         public RoleEnum Role { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
-
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
-
-        public List<UserTask>? Tasks { get; set; }
-        public List<Notification>? Notifications { get; set; }
 
     }
 }

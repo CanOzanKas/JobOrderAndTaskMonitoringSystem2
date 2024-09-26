@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppPersistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240923154405_EntitiesAreAdded")]
-    partial class EntitiesAreAdded
+    [Migration("20240925114347_createdb")]
+    partial class createdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -189,7 +189,7 @@ namespace AppPersistence.Migrations
             modelBuilder.Entity("AppCore.Entities.Notification", b =>
                 {
                     b.HasOne("AppCore.Entities.User", "User")
-                        .WithMany("Notifications")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -200,7 +200,7 @@ namespace AppPersistence.Migrations
             modelBuilder.Entity("AppCore.Entities.User", b =>
                 {
                     b.HasOne("AppCore.Entities.Department", "Department")
-                        .WithMany("Users")
+                        .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -211,13 +211,13 @@ namespace AppPersistence.Migrations
             modelBuilder.Entity("AppCore.Entities.UserTask", b =>
                 {
                     b.HasOne("AppCore.Entities.User", "AssignedUser")
-                        .WithMany("Tasks")
+                        .WithMany()
                         .HasForeignKey("AssignedTo")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AppCore.Entities.JobOrder", "JobOrder")
-                        .WithMany("Tasks")
+                        .WithMany()
                         .HasForeignKey("JobOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -225,23 +225,6 @@ namespace AppPersistence.Migrations
                     b.Navigation("AssignedUser");
 
                     b.Navigation("JobOrder");
-                });
-
-            modelBuilder.Entity("AppCore.Entities.Department", b =>
-                {
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("AppCore.Entities.JobOrder", b =>
-                {
-                    b.Navigation("Tasks");
-                });
-
-            modelBuilder.Entity("AppCore.Entities.User", b =>
-                {
-                    b.Navigation("Notifications");
-
-                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

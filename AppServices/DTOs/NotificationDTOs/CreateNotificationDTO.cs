@@ -12,7 +12,7 @@ namespace AppServices.DTOs.NotificationDTOs {
 
         public int UserId { get; set; }
 
-        public int TaskId { get; set; }
+        public int UserTaskId { get; set; }
 
         public DateTime CreatedDate { get; set; }
     }

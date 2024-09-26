@@ -25,7 +25,7 @@ namespace AppServices.Service.JobOrderServices {
                 Description = createJobOrderDTO.Description,
                 Priority = createJobOrderDTO.Priority,
                 EstimatedCompletionDate = createJobOrderDTO.EstimatedCompletionDate,
-                Status = createJobOrderDTO.Status,
+                Status = JobOrderStatusEnum.Open,
                 CreatedDate = createJobOrderDTO.CreatedDate
             };
 
@@ -47,8 +47,7 @@ namespace AppServices.Service.JobOrderServices {
                 EstimatedCompletionDate= o.EstimatedCompletionDate,
                 Status = o.Status,
                 CreatedDate = o.CreatedDate,
-                UpdatedDate = o.UpdatedDate,
-                Tasks = o.Tasks
+                UpdatedDate = o.UpdatedDate
             }).ToList();
         }
 
@@ -62,9 +61,51 @@ namespace AppServices.Service.JobOrderServices {
                 EstimatedCompletionDate = jobOrder.EstimatedCompletionDate,
                 Status = jobOrder.Status,
                 CreatedDate = jobOrder.CreatedDate,
-                UpdatedDate = jobOrder.UpdatedDate,
-                Tasks = jobOrder.Tasks
+                UpdatedDate = jobOrder.UpdatedDate
             };
+        }
+
+        public JobOrderReportDTO GetJobOrderReport() {
+            var jobOrders = _repository.GetAll();
+            int openOrders = 0;
+            int closedOrders = 0;
+            int cancelledOrders = 0;
+            var jobOrderReportDTO = new JobOrderReportDTO {
+                JobOrderDetails = new List<JobOrderDetailsDTO>()
+            };
+            foreach(var jobOrder in jobOrders) {
+                string Status;
+                if(jobOrder.Status == JobOrderStatusEnum.Open) {
+                    Status = "Open";
+                    openOrders++;
+                } 
+                if(jobOrder.Status == JobOrderStatusEnum.Cancelled) {
+                    Status = "Cancelled";
+                    cancelledOrders++;
+                } else {
+                    Status = "Closed";
+                    closedOrders++;
+                }
+
+
+                string Priority = PriorityEnum.Low == jobOrder.Priority ? "Low" : PriorityEnum.Medium == jobOrder.Priority ? "Medium" : "High";
+
+                var jobOrderReport = new JobOrderDetailsDTO {
+                    Title = jobOrder.Title,
+                    Description = jobOrder.Description,
+                    Priority = Priority,
+                    EstimatedCompletionDate = jobOrder.EstimatedCompletionDate,
+                    Status = Status,
+                    CreatedDate = jobOrder.CreatedDate,
+                    UpdatedDate = jobOrder.UpdatedDate
+                };
+                jobOrderReportDTO.JobOrderDetails.Add(jobOrderReport);
+
+            }
+            jobOrderReportDTO.TotalOpenOrders = openOrders;
+            jobOrderReportDTO.TotalClosedOrders = closedOrders;
+            jobOrderReportDTO.TotalCancelledOrders = cancelledOrders;
+            return jobOrderReportDTO;
         }
 
         public List<JobOrderDTO> GetJobOrdersByStatus(JobOrderStatusEnum status) {
@@ -79,8 +120,7 @@ namespace AppServices.Service.JobOrderServices {
                     EstimatedCompletionDate= jo.EstimatedCompletionDate,
                     Status = jo.Status,
                     CreatedDate = jo.CreatedDate,
-                    UpdatedDate = jo.UpdatedDate,
-                    Tasks = jo.Tasks
+                    UpdatedDate = jo.UpdatedDate
             }).ToList();
 
         }
@@ -94,8 +134,7 @@ namespace AppServices.Service.JobOrderServices {
                 EstimatedCompletionDate = jobOrderDTO.EstimatedCompletionDate,
                 Status = jobOrderDTO.Status,
                 CreatedDate = jobOrderDTO.CreatedDate,
-                UpdatedDate = jobOrderDTO.UpdatedDate,
-                Tasks = jobOrderDTO.Tasks
+                UpdatedDate = jobOrderDTO.UpdatedDate
             };
             _repository.Update(jobOrder);
         }

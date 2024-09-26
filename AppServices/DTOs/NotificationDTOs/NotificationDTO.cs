@@ -1,4 +1,5 @@
 ﻿using AppCore.Entities;
+using AppServices.DTOs.UserDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace AppServices.DTOs.NotificationDTOs {
         public string Message { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public UserDTO User { get; set; }
 
         public int TaskId { get; set; }
 

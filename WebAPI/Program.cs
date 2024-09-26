@@ -13,8 +13,8 @@ builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddScoped<IDepartmentService,DepartmentService>();
-//builder.Services.AddScoped<IJobOrderService,JobOrderService>();
-//builder.Services.AddScoped<IUserTaskService,UserTaskService>();
+builder.Services.AddScoped<IJobOrderService,JobOrderService>();
+builder.Services.AddScoped<IUserTaskService,UserTaskService>();
 //builder.Services.AddScoped<IDepartmentService,DepartmentService>();
 
 builder.Services.AddControllers();

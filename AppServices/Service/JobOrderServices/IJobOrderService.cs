@@ -16,6 +16,6 @@ namespace AppServices.Service.JobOrderServices {
         public void DeleteJobOrder(int id);
         public void UpdateJobOrder(JobOrderDTO jobOrderDTO);
         public List<JobOrderDTO> GetJobOrdersByStatus(JobOrderStatusEnum status);
-
+        public JobOrderReportDTO GetJobOrderReport();
     }
 }
