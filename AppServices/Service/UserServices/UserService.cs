@@ -63,6 +63,25 @@ namespace AppServices.Service.UserServices {
             }).ToList();
         }
 
+        public UserDTO GetUserByEmail(string email) {
+            var user = _repository.GetAll().FirstOrDefault(u => u.Email == email);
+
+            if(user == null) {
+                return null;
+            }
+            return new UserDTO {
+                Id = user.Id,
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                Role = user.Role,
+                CreatedDate = user.CreatedDate,
+                UpdatedDate = user.UpdatedDate,
+                DepartmentId = user.DepartmentId
+            };
+
+        }
+
         public UserDTO GetUserById(int id) {
             User user = _repository.GetById(id);
             return new UserDTO {

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace AppPersistence.Repositories.GenericRepo {
     public interface IGenericRepository<T> where T : class {
         public void Create(T entity);
+        public T CreateAndReturn(T entity);
         public void Update(T entity);
         public void Delete(T entity);
         public List<T> GetAll();

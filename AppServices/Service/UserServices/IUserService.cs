@@ -15,5 +15,7 @@ namespace AppServices.Service.UserServices {
         public UserDTO GetUserById(int id);
         public List<UserDTO> GetAllUsersByDepartment(int departmentId);
 
+        public UserDTO GetUserByEmail(string email);
+
     }
 }

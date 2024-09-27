@@ -19,6 +19,11 @@ namespace AppPersistence.Repositories.GenericRepo {
             _context.Add<T>(entity);
             _context.SaveChanges();
         }
+        public T CreateAndReturn(T entity) {
+            T createdEntity = _context.Add<T>(entity).Entity;
+            _context.SaveChanges();
+            return createdEntity;
+        }
 
         public void Delete(T entity) {
             _context.Remove<T>(entity);

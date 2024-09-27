@@ -3,10 +3,12 @@ using AppCore.Enums;
 using AppPersistence.Repositories.GenericRepo;
 using AppServices.DTOs.DepartmentDTOs;
 using AppServices.DTOs.JobOrderDTOs;
+using AppServices.DTOs.NotificationDTOs;
 using AppServices.DTOs.UserDTOs;
 using AppServices.DTOs.UserTaskDTOs;
 using AppServices.Service.DepartmentServices;
 using AppServices.Service.JobOrderServices;
+using AppServices.Service.NotificationServices;
 using AppServices.Service.UserServices;
 using Microsoft.VisualBasic;
 using System;
@@ -22,16 +24,17 @@ namespace AppServices.Service.UserTaskServices {
         private readonly IJobOrderService _jobOrderService;
         private readonly IUserService _userService;
         private readonly IDepartmentService _departmentService;
-
-        public UserTaskService(IGenericRepository<UserTask> repository, IJobOrderService jobOrderService, IUserService userService, IDepartmentService departmentService) { 
+        private readonly INotificationService _notificationService;
+        public UserTaskService(IGenericRepository<UserTask> repository, IJobOrderService jobOrderService, IUserService userService, IDepartmentService departmentService, INotificationService notificationService) { 
             _repository = repository; 
             _jobOrderService = jobOrderService;
             _userService = userService;
             _departmentService = departmentService;
+            _notificationService = notificationService;
         }
 
         public void CreateUserTask(CreateUserTaskDTO userTaskDTO) {
-            _repository.Create(new UserTask {
+            var userTask = _repository.CreateAndReturn(new UserTask {
                 JobOrderId = userTaskDTO.JobOrderId,
                 Title = userTaskDTO.Title,
                 Description = userTaskDTO.Description,
@@ -39,10 +42,28 @@ namespace AppServices.Service.UserTaskServices {
                 DueDate = userTaskDTO.DueDate,
                 Status = UserTaskStatusEnum.InProgress,
             });
+            
+            _notificationService.CreateNotification(new CreateNotificationDTO {
+                Message = "New User Task is created",
+                UserId = userTaskDTO.AssignedTo,
+                UserTaskId = userTask.Id,
+                CreatedDate = DateTime.Now,
+            });
+            
+
         }
 
         public void DeleteUserTask(int id) {
-            _repository.Delete(_repository.GetById(id));    
+            var userTask = _repository.GetById(id);
+            _notificationService.CreateNotification(new CreateNotificationDTO {
+                Message = "User Task with Id " + id +" is deleted!",
+                UserId = userTask.AssignedTo,
+                UserTaskId = id,
+                CreatedDate = DateTime.Now,
+            });
+            _repository.Delete(userTask);
+            
+
         }
 
         public List<UserTaskDTO> GetAllUserTasks() {
@@ -203,6 +224,13 @@ namespace AppServices.Service.UserTaskServices {
             userTask.DueDate = userTaskDTO.DueDate;
             userTask.Status = userTaskDTO.Status;
             _repository.Update(userTask);
+            var notification = _notificationService.GetNotificationByUserAndUserTaskId(user.Id,userTask.Id);
+            _notificationService.CreateNotification(new CreateNotificationDTO {
+                Message = "User Task with Id " + userTask.Id + " is updated!",
+                UserId = userTaskDTO.AssignedTo,
+                UserTaskId = userTask.Id,
+                CreatedDate = DateTime.Now,
+            });
         }
     }
 }

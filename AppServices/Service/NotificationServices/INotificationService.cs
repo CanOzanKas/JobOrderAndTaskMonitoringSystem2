@@ -13,5 +13,6 @@ namespace AppServices.Service.NotificationServices {
         public void DeleteNotification(int id);
         public List<NotificationDTO> GetAllNotificationsByUserId(int userId);
         public NotificationDTO GetNotificationById(int id);
+        public NotificationDTO GetNotificationByUserAndUserTaskId(int userId,int userTaskId);
     }
 }

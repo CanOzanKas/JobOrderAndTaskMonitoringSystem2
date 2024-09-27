@@ -1,5 +1,6 @@
 ﻿using AppCore.Entities;
 using AppServices.DTOs.UserDTOs;
+using AppServices.DTOs.UserTaskDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace AppServices.DTOs.NotificationDTOs {
         public int UserId { get; set; }
         public UserDTO User { get; set; }
 
-        public int TaskId { get; set; }
+        public int UserTaskId { get; set; }
+        public UserTaskDTO UserTask { get; set; }
 
         public DateTime CreatedDate { get; set; }
     }
